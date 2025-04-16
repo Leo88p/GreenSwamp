@@ -19,7 +19,7 @@ namespace Lab3
         }
         public async Task InvokeAsync(HttpContext context)
         {
-            using (StreamWriter outputFile = new StreamWriter(Path.Combine(System.AppContext.BaseDirectory, "log.txt"), true))
+            using (StreamWriter outputFile = new StreamWriter("log.txt", true))
             {
                 outputFile.WriteLine(DateTime.Now.ToString() + " " + context.Connection.RemoteIpAddress?.ToString() + " " + context.Request.Path.ToString() + " " + context.Response.StatusCode.ToString());
             }

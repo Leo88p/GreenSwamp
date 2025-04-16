@@ -1,5 +1,6 @@
 ﻿@page
 @model Lab3.Pages.ContactModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
 	ViewData["Title"] = "About Greenswamp";
 }
@@ -12,13 +13,14 @@
             <p class="text-swamp-700">Send a message that'll hop straight to our team</p>
         </div>
 
-        <form id="contactForm" class="space-y-6">
+        <form id="contactForm" class="space-y-6" method="post" asp-antiforgery="true">
             <!-- Name Field -->
             <div>
                 <label class="block text-sm font-medium text-swamp-700 mb-1">
                     Your Name
                 </label>
                 <input type="text"
+                       asp-for="Record.Name"
                        required
                        class="w-full px-4 py-2 border border-swamp-200 rounded-lg focus:ring-2 focus:ring-swamp-400 focus:border-transparent"
                        placeholder="Viggo The Frogger">
@@ -30,6 +32,7 @@
                     Your Email
                 </label>
                 <input type="email"
+                       asp-for="Record.Email"
                        required
                        class="w-full px-4 py-2 border border-swamp-200 rounded-lg focus:ring-2 focus:ring-swamp-400 focus:border-transparent"
                        placeholder="croak@swamp.edu">
@@ -40,7 +43,8 @@
                 <label class="block text-sm font-medium text-swamp-700 mb-1">
                     Message Topic
                 </label>
-                <select class="w-full px-4 py-2 border border-swamp-200 rounded-lg focus:ring-2 focus:ring-swamp-400 focus:border-transparent">
+                <select asp-for="Record.Topic"
+                    class="w-full px-4 py-2 border border-swamp-200 rounded-lg focus:ring-2 focus:ring-swamp-400 focus:border-transparent">
                     <option>General Question</option>
                     <option>Bug Report</option>
                     <option>Feature Request</option>
@@ -54,6 +58,7 @@
                     Your Message
                 </label>
                 <textarea rows="5"
+                          asp-for="Record.Message"
                           required
                           class="w-full px-4 py-2 border border-swamp-200 rounded-lg focus:ring-2 focus:ring-swamp-400 focus:border-transparent"
                           placeholder="Type your message here..."></textarea>
@@ -98,9 +103,16 @@
     // Form Handling
     document.getElementById('contactForm').addEventListener('submit', function(e) {
         e.preventDefault();
-
         // Basic validation
         if(this.checkValidity()) {
+            const formData = new FormData(document.getElementById('contactForm'))
+            fetch('/Contact', {
+                method: 'POST', 
+                body: new URLSearchParams(formData),
+                headers: {
+                    'RequestVerificationToken': document.getElementsByName("__RequestVerificationToken")[0].value
+                }
+            });
             showContactSuccess();
             this.reset();
         }
