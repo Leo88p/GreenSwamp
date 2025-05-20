@@ -33,6 +33,7 @@
                 </label>
                 <input type="email"
                        asp-for="Record.Email"
+                       pattern=".+@@.+\.edu"
                        required
                        class="w-full px-4 py-2 border border-swamp-200 rounded-lg focus:ring-2 focus:ring-swamp-400 focus:border-transparent"
                        placeholder="croak@swamp.edu">
@@ -101,20 +102,23 @@
 
 <script>
     // Form Handling
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         // Basic validation
         if(this.checkValidity()) {
             const formData = new FormData(document.getElementById('contactForm'))
-            fetch('/Contact', {
+            const result = await fetch('/Contact', {
                 method: 'POST', 
                 body: new URLSearchParams(formData),
                 headers: {
                     'RequestVerificationToken': document.getElementsByName("__RequestVerificationToken")[0].value
                 }
             });
-            showContactSuccess();
-            this.reset();
+            const answer = await result.json()
+            if (answer == 'correct') {
+                showContactSuccess();
+                this.reset();
+            }
         }
     });
 

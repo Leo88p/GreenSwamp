@@ -3,6 +3,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using CsvHelper;
+using System.Text.RegularExpressions;
 
 namespace Lab3.Pages
 {
@@ -14,12 +15,21 @@ namespace Lab3.Pages
         [BindProperty]
         public Record Record { get; set; } = new("", "", "", "");
 
-        public void OnPost()
+        public IActionResult OnPost()
         {
             using var writer = new StreamWriter("messages.csv", true);
             using var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
-            csv.WriteRecord<Record>(Record);
-            csv.NextRecord();
+            Regex regex = new Regex(@".+@.+\.edu");
+            if (String.IsNullOrWhiteSpace(Record.Name) || String.IsNullOrWhiteSpace(Record.Message) || !regex.IsMatch(Record.Email))
+            {
+                return new JsonResult("wrong");
+            }
+            else
+            {
+                csv.WriteRecord<Record>(Record);
+                csv.NextRecord();
+                return new JsonResult("correct");
+            }
         }
 
     }

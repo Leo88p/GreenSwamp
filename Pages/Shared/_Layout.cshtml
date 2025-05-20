@@ -131,7 +131,7 @@
                         <h4 class="text-sm font-semibold">Company</h4>
                         <ul class="mt-4 space-y-2 text-sm">
                             <li><a asp-page="/About" class="text-swamp-300 hover:text-white">About</a></li>
-                            <li><a asp-page="/Contact" class="text-swamp-300 hover:text-white">Contact</a></li>
+                            <li><a asp-controller="/Contact" class="text-swamp-300 hover:text-white">Contact</a></li>
                         </ul>
                     </div>
                     <div>
@@ -144,8 +144,8 @@
                 </div>
                 <div>
                     <h4 class="text-sm font-semibold">Stay Updated</h4>
-                    <form class="mt-4 flex">
-                        <input type="email" placeholder="Enter your email"
+                    <form asp-controller="Subscribe" asp-action="Subscribe" method="post" class="mt-4 flex">
+                        <input type="email" name='data' placeholder="Enter your email"
                                class="px-4 py-2 rounded-l-full flex-1 text-swamp-900">
                         <button class="bg-swamp-500 px-6 py-2 rounded-r-full hover:bg-swamp-600">Subscribe</button>
                     </form>
