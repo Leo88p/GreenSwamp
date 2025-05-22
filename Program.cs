@@ -47,19 +47,12 @@ namespace Lab3
         public IActionResult Subscribe(string data)
         {
             MailAddress from = new MailAddress("tertestmail@mail.ru", "Swamp");
-            // кому отправляем
             MailAddress to = new MailAddress(data);
-            // создаем объект сообщения
             MailMessage m = new MailMessage(from, to);
-            // тема письма
             m.Subject = "Тест";
-            // текст письма
             m.Body = "<h2>Письмо-тест работы smtp-клиента</h2>";
-            // письмо представляет код html
             m.IsBodyHtml = true;
-            // адрес smtp-сервера и порт, с которого будем отправлять письмо
             SmtpClient smtp = new SmtpClient("smtp.mail.ru", 587);
-            // логин и пароль
             smtp.Credentials = new NetworkCredential("tertestmail@mail.ru", "xyL6MfwGiyKgxeLqnuph");
             smtp.EnableSsl = true;
             smtp.Send(m);
