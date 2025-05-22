@@ -1,8 +1,10 @@
 ﻿using Lab3;
+using Lab3.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using System.Net.Mail;
 using System.Net;
+using System.Net.Mail;
 
 namespace Lab3
 {
@@ -16,6 +18,8 @@ namespace Lab3
             // Add services to the container.
             builder.Services.AddControllers();
             builder.Services.AddRazorPages();
+            builder.Services.AddDbContext<SwampContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("SwampContext")));
 
             var app = builder.Build();
 
@@ -26,14 +30,21 @@ namespace Lab3
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseLogHTTP();
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+
+                var context = services.GetRequiredService<SwampContext>();
+                context.Database.EnsureCreated();
+                //DbInitializer.Initialize(context);
+            }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseStatusCodePagesWithRedirects("/{0}");
             app.UseRouting();
             app.UseAuthorization();
 
-            app.MapControllers();
+            //app.MapControllers();
             app.MapRazorPages();
 
             app.Run();

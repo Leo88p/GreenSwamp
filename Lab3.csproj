@@ -7,15 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Pages\404 - Копировать.cshtml.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="Pages\404 - Копировать.cshtml" />
+    <Compile Remove="Pages\Новая папка\**" />
+    <Content Remove="Pages\Новая папка\**" />
+    <EmbeddedResource Remove="Pages\Новая папка\**" />
+    <None Remove="Pages\Новая папка\**" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CsvHelper" Version="33.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.5" />
   </ItemGroup>
 
 </Project>
