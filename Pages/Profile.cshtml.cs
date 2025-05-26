@@ -12,6 +12,7 @@ namespace Lab3.Pages
         [FromRoute(Name = "username")]
         public string username { get; set; }
         public User user;
+        public List<Post> posts;
         private readonly SwampContext _context;
         public ProfileModel(SwampContext context)
         {
@@ -28,7 +29,28 @@ namespace Lab3.Pages
             else
             {
                 user = users[0];
+                posts = await _context.Posts.Where(p => p.UserId == user.UserId).ToListAsync();
                 return Page();
+            }
+        }
+        public string TimeAgo(DateTime time)
+        {
+            TimeSpan difference = DateTime.Now - time;
+            if (difference.TotalMinutes < 1)
+            {
+                return (int)difference.TotalSeconds + "s";
+            }
+            else if (difference.TotalHours < 1)
+            {
+                return (int)difference.TotalMinutes + "m";
+            }
+            else if (difference.TotalDays < 1)
+            {
+                return (int)difference.TotalHours + "h";
+            }
+            else
+            {
+                return (int)difference.TotalDays + "d";
             }
         }
     }
