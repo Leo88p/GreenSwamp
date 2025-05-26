@@ -1,4 +1,6 @@
-﻿namespace Lab3.Models
+﻿using System.Text.RegularExpressions;
+
+namespace Lab3.Models
 {
     public class Post
     {
@@ -12,6 +14,14 @@
         public string? ThumbnailUrl { get; set; }
         public DateTime CreatedAt { get; set; }
         public long? ParentPostId { get; set; }
+        public string ContentWithLinks
+        {
+            get
+            {
+                return Regex.Replace(Content, @"#(\w+)",
+                    "<a class='text-swamp-700 hover:text-swamp-500' href='/Ponds/Posts/$1'>#$1</a>");
+            }
+        }
 
     }
 }

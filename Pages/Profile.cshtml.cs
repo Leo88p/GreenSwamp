@@ -1,9 +1,10 @@
-﻿using Lab3.Models;
+﻿using Lab3.Data;
+using Lab3.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
-using Lab3.Data;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Text.RegularExpressions;
 
 namespace Lab3.Pages
 {
@@ -29,11 +30,11 @@ namespace Lab3.Pages
             else
             {
                 user = users[0];
-                posts = await _context.Posts.Where(p => p.UserId == user.UserId).ToListAsync();
+                posts = await _context.Posts.Where(p => p.UserId == user.UserId).OrderByDescending(p => p.CreatedAt).ToListAsync();
                 return Page();
             }
         }
-        public string TimeAgo(DateTime time)
+        public static string TimeAgo(DateTime time)
         {
             TimeSpan difference = DateTime.Now - time;
             if (difference.TotalMinutes < 1)

@@ -190,84 +190,6 @@
 			<!-- Post Feed -->
 			<div class="space-y-6">
 
-				<!-- Post Item -->
-				<div class="bg-white shadow-sm p-6">
-					<div class="flex items-start space-x-3">
-						<img src="https://i.pravatar.cc/100?u=frogger_vig@pravatar.com" alt="User" class="w-16 h-16 rounded-full">
-						<div class="flex-1">
-							<div class="flex items-center space-x-2">
-								<h4 class="font-semibold text-swamp-900">Viggo The Frogger</h4>
-								<a href="#" class="text-sm text-swamp-500 hover:text-swamp-700">@@frogger_vig</a>
-								<span class="text-swamp-500">·</span>
-								<a href="post.html" class="text-sm text-swamp-500 hover:text-swamp-700">2h ago</a>
-							</div>
-							<p class="mt-2 text-swamp-700">
-								When the code compiles on the first try 🐸✨
-								<span class="text-swamp-700 hover:text-swamp-500">#TechMagic</span>
-								<span class="text-swamp-700 hover:text-swamp-500">#PixelFrog</span>
-							</p>
-							<div class="mt-4 rounded-lg overflow-hidden cyber-border hover:cyber-glow transition-all">
-								<video class="w-full aspect-video object-cover bg-slate-900"
-									   poster="https://via.placeholder.com/800x450"
-									   controls
-									   preload="metadata"
-									   title="Digital painting of a neon frog piloting a cyberpunk airship">
-									<source src="~/Standard_Mode_a_looed_gif_of_a_pixel_frog_flyi.mp4" type="video/mp4">
-									Your browser does not support the video tag.
-								</video>
-							</div>
-
-							<div class="mt-4 flex items-center space-x-6 text-swamp-500">
-								<button class="flex items-center space-x-2 hover:text-swamp-600">
-									<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-									</svg>
-									<span>1 Answer</span>
-								</button>
-								<button class="flex items-center space-x-2 hover:text-swamp-600">
-									<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-									</svg>
-									<span>1 Reribb</span>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Post Item -->
-				<div class="bg-white shadow-sm p-6">
-					<div class="flex items-start space-x-3">
-						<img src="https://i.pravatar.cc/100?u=frogger_vig@pravatar.com" alt="User" class="w-16 h-16 rounded-full">
-						<div class="flex-1">
-							<div class="flex items-center space-x-2">
-								<h4 class="font-semibold text-swamp-900">Viggo The Frogger</h4>
-								<a href="#" class="text-sm text-swamp-500 hover:text-swamp-700">@@frogger_vig</a>
-								<span class="text-swamp-500">·</span>
-								<a href="#" class="text-sm text-swamp-500 hover:text-swamp-700">8h ago</a>
-							</div>
-							<p class="mt-2 text-swamp-700">
-								Debugging my sleep schedule (spoiler: it’s still 404). Send caffeine or existential epiphanies.
-							</p>
-							<img class="mt-2 p-1 rounded-xl" src="~/4x3_Photo_of_a_messy_desk_with_table.png" alt="Photo of a messy desk with tablets, coffee, and a sticky note saying “ERROR: BRAIN.EXE HAS CRASHED”" />
-							<div class="mt-4 flex items-center space-x-6 text-swamp-500">
-								<button class="flex items-center space-x-2 hover:text-swamp-600">
-									<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-									</svg>
-									<span>10 Answers</span>
-								</button>
-								<button class="flex items-center space-x-2 hover:text-swamp-600">
-									<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-									</svg>
-									<span>2 Reribbs</span>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-
 				@foreach (var post in Model.posts)
 				{
 					<div class="bg-white shadow-sm p-6">
@@ -276,12 +198,12 @@
 							<div class="flex-1">
 								<div class="flex items-center space-x-2">
 									<h4 class="font-semibold text-swamp-900">@Model.user.DisplayName</h4>
-									<a href="#" class="text-sm text-swamp-500 hover:text-swamp-700">@@@Model.user.Username</a>
+									<a href="/Profile/@Model.user.Username" class="text-sm text-swamp-500 hover:text-swamp-700">@@@Model.user.Username</a>
 									<span class="text-swamp-500">·</span>
-									<a href="post.html" class="text-sm text-swamp-500 hover:text-swamp-700">@Model.TimeAgo(post.CreatedAt) ago</a>
+									<a href="post.html" class="text-sm text-swamp-500 hover:text-swamp-700">@ProfileModel.TimeAgo(post.CreatedAt) ago</a>
 								</div>
 								<p class="mt-2 text-swamp-700">
-									@post.Content
+									@Html.Raw(post.ContentWithLinks)
 								</p>
 								@if (post.PostType == "video")
 								{
@@ -427,9 +349,10 @@
 				<div class="flex items-start space-x-2 text-swamp-600">
 					<a href="#" class="hover:text-swamp-800">Contact</a>
 					<span>•</span>
-					<a href="privacy.html" class="hover:text-swamp-800">Privacy</a>
+					<a href="privacy
+" class="hover:text-swamp-800">Privacy</a>
 					<span>•</span>
-					<a href="tos.html" class="hover:text-swamp-800">Terms</a>
+					<a href="/Tos" class="hover:text-swamp-800">Terms</a>
 				</div>
 			</div>
 		</div>

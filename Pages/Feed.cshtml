@@ -34,6 +34,56 @@
 
         <!-- Main Feed -->
         <div class="lg:col-span-2 divide-y order-3">
+            @foreach (var post in Model.posts)
+            {
+                <div class="bg-white shadow-sm p-6">
+                    <div class="flex items-start space-x-3">
+                        <img src=@post.user.AvatarUrl alt="User" class="w-16 h-16 rounded-full">
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-2">
+                                <h4 class="font-semibold text-swamp-900">@post.user.DisplayName</h4>
+                                <a href="/Profile/@post.user.Username" class="text-sm text-swamp-500 hover:text-swamp-700">@@@post.user.Username</a>
+                                <span class="text-swamp-500">·</span>
+                                <a href="post.html" class="text-sm text-swamp-500 hover:text-swamp-700">@ProfileModel.TimeAgo(post.post.CreatedAt) ago</a>
+                            </div>
+                            <p class="mt-2 text-swamp-700">
+                                @Html.Raw(post.post.ContentWithLinks)
+                            </p>
+                            @if (post.post.PostType == "video")
+                            {
+                                <div class="mt-4 rounded-lg overflow-hidden cyber-border hover:cyber-glow transition-all">
+                                    <video class="w-full aspect-video object-cover bg-slate-900"
+                                           poster=@post.post.ThumbnailUrl
+                                           controls
+                                           preload="metadata"
+                                           title="Digital painting of a neon frog piloting a cyberpunk airship">
+                                        <source src=@post.post.MediaUrl type=@post.post.MediaType>
+                                        @post.post.AltText
+                                    </video>
+                                </div>
+                            }
+                            else if (post.post.PostType == "image")
+                            {
+                                <img class="mt-2 p-1 rounded-xl" src=@post.post.MediaUrl alt=@post.post.AltText />
+                            }
+                            <div class="mt-4 flex items-center space-x-6 text-swamp-500">
+                                <button class="flex items-center space-x-2 hover:text-swamp-600">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                    </svg>
+                                    <span>1 Answer</span>
+                                </button>
+                                <button class="flex items-center space-x-2 hover:text-swamp-600">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                    </svg>
+                                    <span>1 Reribb</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
             <!-- Post Card -->
             <div class="bg-white shadow-sm p-6">
                 <div class="flex items-start space-x-3">
