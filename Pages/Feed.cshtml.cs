@@ -18,9 +18,9 @@ namespace Lab3.Pages
 
         public async Task<IActionResult> OnGetAsync()
         {
-            posts = await _context.Posts.Where(p=>p.PostType!="event").
+            posts = await _context.Posts.Where(p=>p.PostType!="event" && p.ParentPostId == null).
                 Join(_context.Users, p => p.UserId, u => u.UserId, (p,u) => new PostJoin(p, u)).ToListAsync();
-            var events = await _context.Posts.Where(p => p.PostType == "event").
+            var events = await _context.Posts.Where(p => p.PostType == "event" && p.ParentPostId == null).
                 Join(_context.Events, p => p.PostId, e => e.PostId, (p, e) => new PostJoin(p, e)).ToListAsync();
             posts.AddRange(events);
             posts = posts.OrderByDescending(p => p.post.CreatedAt).ToList();

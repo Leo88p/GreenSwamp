@@ -19,7 +19,7 @@ namespace Lab3.Models
             get
             {
                 return Regex.Replace(Content, @"#(\w+)",
-                    "<a class='text-swamp-700 hover:text-swamp-500' href='/Ponds/Posts/$1'>#$1</a>");
+                    "<a class='text-swamp-700 hover:text-swamp-500' href='/Ponds/$1'>#$1</a>");
             }
         }
 

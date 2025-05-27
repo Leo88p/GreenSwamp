@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{tag}"
 @model Lab3.Pages.FeedModel
 @{
     ViewData["Title"] = "Greenswamp Feed";
@@ -109,7 +109,7 @@
                                         }
                                         else
                                         {
-                                            <p>Register (@(post.Event.MaxCapacity-post.Event.RsvpCount) spots left)</p>
+                                            <p>Register (@(post.Event.MaxCapacity - post.Event.RsvpCount) spots left)</p>
                                         }
                                     </button>
                                     <button class="text-swamp-600 hover:text-swamp-800 text-sm">
@@ -181,12 +181,13 @@
                 <div class="flex items-start space-x-2 text-swamp-600">
                     <a href="Contact" class="hover:text-swamp-800">Contact</a>
                     <span>
-                        •</span>
-                        <a href="Privacy" class="hover:text-swamp-800">Privacy</a>
-                        <span>
                         •
                     </span>
-                            <a href="Tos" class="hover:text-swamp-800">Terms</a>
+                    <a href="Privacy" class="hover:text-swamp-800">Privacy</a>
+                    <span>
+                        •
+                    </span>
+                    <a href="Tos" class="hover:text-swamp-800">Terms</a>
                 </div>
             </div>
         </div>

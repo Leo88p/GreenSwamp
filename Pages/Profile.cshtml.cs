@@ -30,7 +30,7 @@ namespace Lab3.Pages
             else
             {
                 user = users[0];
-                posts = await _context.Posts.Where(p => p.UserId == user.UserId).OrderByDescending(p => p.CreatedAt).ToListAsync();
+                posts = await _context.Posts.Where(p => p.UserId == user.UserId && p.ParentPostId == null).OrderByDescending(p => p.CreatedAt).ToListAsync();
                 return Page();
             }
         }
