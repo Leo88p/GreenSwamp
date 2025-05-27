@@ -19,7 +19,7 @@ namespace Lab3.Pages
 
         public async Task<IActionResult> OnGetAsync()
         {
-            posts = await _context.Posts.Where(p => p.UserId == 5).
+            posts = await _context.Posts.Where(p => p.Content.Contains("#"+tag)).
                 Join(_context.Users, p => p.UserId, u => u.UserId, (p, u) => new PostJoin(p, u)).ToListAsync();
             posts = posts.OrderByDescending(p => p.post.CreatedAt).ToList();
             return Page();
