@@ -5,7 +5,7 @@ namespace Lab3.Models
     public class Post
     {
         public long PostId { get; set; }
-        public long UserId { get; set; }
+        public long? UserId { get; set; }
         public string Content { get; set; } = null!;
         public string PostType { get; set; } = null!;
         public string? MediaUrl { get; set; }

@@ -9,5 +9,6 @@
         public string? HostOrg { get; set; }
         public long? RsvpCount { get; set; }
         public long? MaxCapacity { get; set; }
+        public string Title { get; set; }
     }
 }
