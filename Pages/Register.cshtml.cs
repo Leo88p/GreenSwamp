@@ -72,7 +72,7 @@ namespace Lab3.Pages
 
                 await _signInManager.SignInAsync(authUser, isPersistent: true);
 
-                return RedirectToPage("Profile/"+ User.Identity.Name);
+                return Redirect("/Profile/"+ User.Identity.Name);
             }
 
             // If Identity creation fails, clean up the User entity we created

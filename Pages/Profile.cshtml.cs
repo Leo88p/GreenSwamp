@@ -32,7 +32,10 @@ namespace Lab3.Pages
             else
             {
                 user = users[0];
-                currentUser = (await _context.Users.Where(u => u.Username == User.Identity.Name).ToListAsync())[0];
+                if (User.Identity != null && User.Identity.Name != null)
+                {
+                    currentUser = (await _context.Users.Where(u => u.Username == User.Identity.Name).ToListAsync())[0];
+                }
                 posts = await _context.Posts.Where(p => p.UserId == user.UserId && p.ParentPostId == null).OrderByDescending(p => p.CreatedAt).ToListAsync();
                 return Page();
             }

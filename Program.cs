@@ -100,9 +100,15 @@ namespace Lab3
     [Route("logout")]
     public class LogoutController : ControllerBase
     {
-        [HttpPost]
-        public IActionResult Logout(string path)
+        private readonly SignInManager<Auth> _signInManager;
+        public LogoutController(SignInManager<Auth> signInManager)
         {
+            _signInManager = signInManager;
+        }
+        [HttpPost]
+        public async Task<IActionResult> Logout(string path)
+        {
+            await _signInManager.SignOutAsync();
             return Redirect(path);
         }
     }
