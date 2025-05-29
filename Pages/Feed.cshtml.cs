@@ -15,6 +15,8 @@ namespace Lab3.Pages
         {
             _context = context;
         }
+        public User? currentUser;
+        public string? userName;
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -24,6 +26,7 @@ namespace Lab3.Pages
                 Join(_context.Events, p => p.PostId, e => e.PostId, (p, e) => new PostJoin(p, e)).ToListAsync();
             posts.AddRange(events);
             posts = posts.OrderByDescending(p => p.post.CreatedAt).ToList();
+            currentUser = (await _context.Users.Where(u => u.Username == User.Identity.Name).ToListAsync())[0];
             return Page();
         }
     }

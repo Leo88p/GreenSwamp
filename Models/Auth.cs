@@ -1,14 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace Lab3.Models
 {
-    public class Auth
+    public class Auth : IdentityUser<long>
     {
-        [Key]
-        public long UserId { get; set; }
-        public string PasswordHash { get; set; } = null!;
-        public DateTime? LastLogin { get; set; }
-        public string? ResetToken { get; set; }
-        public DateTime? TokenExpiry { get; set; }
     }
 }

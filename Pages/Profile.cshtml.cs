@@ -19,9 +19,11 @@ namespace Lab3.Pages
         {
             _context = context;
         }
+        public User? currentUser;
 
         public async Task<IActionResult> OnGetAsync()
         {
+            //var t = Request.Path.ToUriComponent();
             var users = await _context.Users.Where(u => u.Username == username).ToListAsync();
             if (users.Count == 0)
             {
@@ -30,6 +32,7 @@ namespace Lab3.Pages
             else
             {
                 user = users[0];
+                currentUser = (await _context.Users.Where(u => u.Username == User.Identity.Name).ToListAsync())[0];
                 posts = await _context.Posts.Where(p => p.UserId == user.UserId && p.ParentPostId == null).OrderByDescending(p => p.CreatedAt).ToListAsync();
                 return Page();
             }

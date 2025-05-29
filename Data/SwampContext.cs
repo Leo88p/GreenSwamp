@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Lab3.Models;
+﻿using Lab3.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Lab3.Data
 {
-    public class SwampContext : DbContext
+    public class SwampContext : IdentityDbContext<Auth, IdentityRole<long>, long>
     {
         public SwampContext(DbContextOptions<SwampContext> options)
             : base(options)
@@ -18,6 +20,7 @@ namespace Lab3.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Auth>().ToTable("Auth");
             modelBuilder.Entity<Event>().ToTable("Event");
             modelBuilder.Entity<Interaction>().ToTable("Interaction");

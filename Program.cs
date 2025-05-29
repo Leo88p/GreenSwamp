@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Net.Mail;
+using Microsoft.AspNetCore.Identity;
+using Lab3.Models;
+using Lab3.Pages;
 
 namespace Lab3
 {
@@ -20,6 +23,21 @@ namespace Lab3
             builder.Services.AddRazorPages();
             builder.Services.AddDbContext<SwampContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("SwampContext")));
+
+            builder.Services.AddIdentity<Auth, IdentityRole<long>>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+            })
+             .AddEntityFrameworkStores<SwampContext>()
+             .AddDefaultTokenProviders();
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Login";
+                options.LogoutPath = "/Logout";
+                options.Cookie.Name = "GreenswampAuth";
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromDays(7);
+            });
 
             var app = builder.Build();
 
@@ -42,6 +60,7 @@ namespace Lab3
             app.UseStaticFiles();
             app.UseStatusCodePagesWithRedirects("/{0}");
             app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();
@@ -77,4 +96,15 @@ namespace Lab3
         [EmailAddress]
         public string Email { get; set; }
     }
+
+    [Route("logout")]
+    public class LogoutController : ControllerBase
+    {
+        [HttpPost]
+        public IActionResult Logout(string path)
+        {
+            return Redirect(path);
+        }
+    }
+
 }
